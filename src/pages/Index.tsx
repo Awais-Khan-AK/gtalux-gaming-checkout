@@ -5,11 +5,14 @@ import AnimatedText from '@/components/AnimatedText';
 import CheckoutContainer from '@/components/CheckoutContainer';
 import GamingStats from '@/components/GamingStats';
 import WalletButton from '@/components/WalletButton';
-import { Download } from 'lucide-react';
+import { Download, Coin } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
+import { WalletState, formatBalance } from '@/utils/phantomWallet';
 
 const Index = () => {
   const [walletConnected, setWalletConnected] = useState(false);
+  const [walletBalance, setWalletBalance] = useState<number | null>(null);
+  const [publicKey, setPublicKey] = useState<string | null>(null);
   
   const stats = [
     { value: '10,000+', label: 'Digital Games' },
@@ -17,8 +20,10 @@ const Index = () => {
     { value: 'Gtalux', label: 'Gaming Database' }
   ];
   
-  const handleWalletConnect = () => {
-    setWalletConnected(true);
+  const handleWalletConnect = (walletState: WalletState) => {
+    setWalletConnected(walletState.connected);
+    setWalletBalance(walletState.balance);
+    setPublicKey(walletState.publicKey);
   };
   
   const handleDownload = () => {
@@ -61,7 +66,7 @@ const Index = () => {
                   className="text-xl font-medium mb-2"
                 />
                 <AnimatedText
-                  text="Connect your wallet to complete this transaction securely."
+                  text="Connect your Phantom wallet to complete this transaction securely."
                   delay={800}
                   className="text-sm text-gaming-light/70"
                 />
@@ -71,7 +76,7 @@ const Index = () => {
             </>
           ) : (
             <>
-              <div className="mb-8 text-center">
+              <div className="mb-6 text-center">
                 <AnimatedText
                   text="Payment Complete!"
                   className="text-2xl font-bold text-gradient mb-2"
@@ -79,8 +84,24 @@ const Index = () => {
                 <AnimatedText
                   text="Thank you for your purchase. Your digital items are ready for download."
                   delay={200}
-                  className="text-sm text-gaming-light/70"
+                  className="text-sm text-gaming-light/70 mb-4"
                 />
+                
+                {/* Wallet Balance Display */}
+                <div className="glassmorphism p-4 rounded-lg mt-4 mx-auto max-w-sm animate-fade-in">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Coin size={18} className="text-gaming-primary" />
+                    <span className="text-lg font-medium">Wallet Balance:</span>
+                  </div>
+                  <div className="text-2xl font-bold text-gradient">
+                    {formatBalance(walletBalance)}
+                  </div>
+                  {publicKey && (
+                    <div className="mt-2 text-xs text-gaming-light/60 truncate max-w-[250px] mx-auto">
+                      {publicKey.slice(0, 6)}...{publicKey.slice(-6)}
+                    </div>
+                  )}
+                </div>
               </div>
               
               <button

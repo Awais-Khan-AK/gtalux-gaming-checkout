@@ -1,11 +1,12 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Wallet } from 'lucide-react';
+import { Wallet, Loader2, Coin } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
+import { connectWallet, WalletState, formatBalance } from '@/utils/phantomWallet';
 
 interface WalletButtonProps {
-  onConnect?: () => void;
+  onConnect?: (walletState: WalletState) => void;
   price?: string;
   className?: string;
 }
@@ -13,21 +14,37 @@ interface WalletButtonProps {
 const WalletButton = ({ onConnect, price = "0.1 SOL", className }: WalletButtonProps) => {
   const [connecting, setConnecting] = useState(false);
   
-  const handleConnect = () => {
+  const handleConnect = async () => {
     setConnecting(true);
     
-    // Simulate wallet connection
-    setTimeout(() => {
-      setConnecting(false);
+    try {
+      const walletState = await connectWallet();
       
+      if (walletState.connected) {
+        toast({
+          title: "Wallet Connected",
+          description: "You can now proceed with your payment.",
+          duration: 3000,
+        });
+        
+        if (onConnect) onConnect(walletState);
+      } else {
+        toast({
+          title: "Connection Failed",
+          description: "Please install Phantom wallet or try again.",
+          duration: 3000,
+        });
+      }
+    } catch (error) {
       toast({
-        title: "Wallet Connected",
-        description: "You can now proceed with your payment.",
+        title: "Connection Error",
+        description: "Could not connect to wallet. Please try again.",
+        variant: "destructive",
         duration: 3000,
       });
-      
-      if (onConnect) onConnect();
-    }, 1500);
+    } finally {
+      setConnecting(false);
+    }
   };
   
   return (
@@ -46,8 +63,8 @@ const WalletButton = ({ onConnect, price = "0.1 SOL", className }: WalletButtonP
       )}
     >
       <span className="relative z-10 flex items-center gap-2">
-        <Wallet size={22} />
-        {connecting ? 'Connecting...' : `Connect Wallet & Pay ${price}`}
+        {connecting ? <Loader2 size={22} className="animate-spin" /> : <Wallet size={22} />}
+        {connecting ? 'Connecting...' : `Connect Phantom & Pay ${price}`}
       </span>
       
       {/* Button glow effect */}
