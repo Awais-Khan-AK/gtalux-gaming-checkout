@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Wallet, Loader2, Coin } from 'lucide-react';
+import { Wallet, Loader2, Coins } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { connectWallet, WalletState, formatBalance } from '@/utils/phantomWallet';
 

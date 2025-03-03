@@ -1,11 +1,10 @@
-
 import { useState } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import AnimatedText from '@/components/AnimatedText';
 import CheckoutContainer from '@/components/CheckoutContainer';
 import GamingStats from '@/components/GamingStats';
 import WalletButton from '@/components/WalletButton';
-import { Download, Coin } from 'lucide-react';
+import { Download, Coins } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { WalletState, formatBalance } from '@/utils/phantomWallet';
 
@@ -90,7 +89,7 @@ const Index = () => {
                 {/* Wallet Balance Display */}
                 <div className="glassmorphism p-4 rounded-lg mt-4 mx-auto max-w-sm animate-fade-in">
                   <div className="flex items-center justify-center gap-2 mb-2">
-                    <Coin size={18} className="text-gaming-primary" />
+                    <Coins size={18} className="text-gaming-primary" />
                     <span className="text-lg font-medium">Wallet Balance:</span>
                   </div>
                   <div className="text-2xl font-bold text-gradient">
