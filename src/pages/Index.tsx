@@ -1,10 +1,12 @@
+
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import AnimatedText from '@/components/AnimatedText';
 import CheckoutContainer from '@/components/CheckoutContainer';
 import GamingStats from '@/components/GamingStats';
 import WalletButton from '@/components/WalletButton';
-import { Download, Coins } from 'lucide-react';
+import { Download, Coins, Settings } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { WalletState, formatBalance } from '@/utils/phantomWallet';
 
@@ -36,6 +38,15 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 md:p-8 relative">
       <AnimatedBackground />
+      
+      {/* Admin Link */}
+      <Link 
+        to="/admin" 
+        className="fixed top-4 right-4 z-50 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full backdrop-blur-sm transition-all"
+        title="Admin Panel"
+      >
+        <Settings size={20} />
+      </Link>
       
       <div className="w-full max-w-6xl mx-auto flex flex-col items-center">
         {/* Header */}
