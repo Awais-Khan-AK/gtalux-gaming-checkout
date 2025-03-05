@@ -104,25 +104,29 @@ const AdminLayout = () => {
           
           <nav className="p-4">
             <ul className="space-y-2">
-              {navItems.map((item) => (
-                <li key={item.path}>
-                  <NavLink
-                    to={item.path}
-                    className={({ isActive }) => cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-lg transition-all",
-                      "hover:bg-white/10",
-                      isActive 
-                        ? "bg-gradient-to-r from-gaming-primary/20 to-gaming-secondary/20 text-white font-medium" 
-                        : "text-gray-300"
-                    )}
-                  >
-                    <item.icon size={20} className={isActive => 
-                      isActive ? "text-gaming-primary" : "text-gray-400"
-                    } />
-                    <span>{item.label}</span>
-                  </NavLink>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <li key={item.path}>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) => cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-lg transition-all",
+                        "hover:bg-white/10",
+                        isActive 
+                          ? "bg-gradient-to-r from-gaming-primary/20 to-gaming-secondary/20 text-white font-medium" 
+                          : "text-gray-300"
+                      )}
+                    >
+                      <item.icon 
+                        size={20} 
+                        className={isActive ? "text-gaming-primary" : "text-gray-400"} 
+                      />
+                      <span>{item.label}</span>
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>
