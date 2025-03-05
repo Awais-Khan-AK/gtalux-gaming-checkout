@@ -116,9 +116,9 @@ const AdminLayout = () => {
                         : "text-gray-300"
                     )}
                   >
-                    <item.icon size={20} className={({ isActive }) => cn(
+                    <item.icon size={20} className={isActive => 
                       isActive ? "text-gaming-primary" : "text-gray-400"
-                    )} />
+                    } />
                     <span>{item.label}</span>
                   </NavLink>
                 </li>
