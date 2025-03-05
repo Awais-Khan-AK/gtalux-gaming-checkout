@@ -90,7 +90,7 @@ const AdminUsers = () => {
             </TableHeader>
             <TableBody>
               {filteredUsers.map((user, index) => (
-                <TableRow key={user.id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                <TableRow key={user.id} className={index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 rounded-full bg-gradient-to-r from-gaming-primary to-gaming-secondary flex items-center justify-center text-white text-xs">

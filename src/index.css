@@ -83,3 +83,37 @@
   position: absolute;
   z-index: -1;
 }
+
+/* Admin table styles with better contrast */
+.admin-table {
+  @apply w-full border-collapse;
+}
+
+.admin-table th {
+  @apply bg-gray-200 text-gray-800 font-semibold p-3 text-left;
+}
+
+.admin-table tr:nth-child(even) {
+  @apply bg-gray-100;
+}
+
+.admin-table tr:nth-child(odd) {
+  @apply bg-gray-50;
+}
+
+.admin-table td {
+  @apply p-3 border-t border-gray-200 text-gray-700;
+}
+
+/* Admin card styles */
+.admin-card {
+  @apply bg-gray-50 border border-gray-200 rounded-lg shadow-md overflow-hidden;
+}
+
+.admin-card-header {
+  @apply bg-gradient-to-r from-gaming-primary/10 to-gaming-secondary/10 p-4 border-b border-gray-200;
+}
+
+.admin-card-body {
+  @apply p-4;
+}

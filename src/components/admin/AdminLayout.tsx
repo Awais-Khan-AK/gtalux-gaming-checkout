@@ -69,7 +69,7 @@ const AdminLayout = () => {
   };
   
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
       {/* Mobile sidebar toggle */}
       <div className="md:hidden p-4 bg-gradient-to-r from-gaming-primary to-gaming-secondary shadow-sm flex items-center justify-between">
         <Button
@@ -89,8 +89,8 @@ const AdminLayout = () => {
       <aside 
         className={cn(
           "w-64 bg-gradient-to-b from-gaming-dark to-gray-900 shadow-xl transition-all duration-300 ease-in-out",
-          "fixed md:static h-full z-30",
-          sidebarOpen ? "left-0" : "-left-64",
+          "fixed md:static md:h-screen z-30",
+          sidebarOpen ? "left-0 h-screen" : "-left-64",
           "flex flex-col justify-between"
         )}
       >
@@ -145,7 +145,7 @@ const AdminLayout = () => {
       </aside>
       
       {/* Main Content */}
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col min-h-screen">
         {/* Backdrop overlay on mobile */}
         {sidebarOpen && (
           <div 
@@ -203,7 +203,7 @@ const AdminLayout = () => {
         </header>
         
         {/* Page Content */}
-        <div className="p-6 bg-gray-50">
+        <div className="p-6 bg-gray-100 flex-1">
           <Outlet />
         </div>
       </main>

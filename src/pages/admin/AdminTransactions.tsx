@@ -103,7 +103,7 @@ const AdminTransactions = () => {
             </TableHeader>
             <TableBody>
               {filteredTransactions.map((transaction, index) => (
-                <TableRow key={transaction.id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                <TableRow key={transaction.id} className={index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"}>
                   <TableCell className="font-medium">{transaction.id}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
