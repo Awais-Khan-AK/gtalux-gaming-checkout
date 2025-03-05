@@ -105,7 +105,7 @@ const AdminDashboard = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-500 mt-1">Get a high-level overview of your gaming store performance</p>
         </div>
         <div className="flex items-center gap-2">
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
             <Calendar className="mr-2 h-4 w-4" />
             Date Range
           </Button>
-          <Button size="sm" className="bg-gradient-to-r from-gaming-primary to-gaming-secondary hover:opacity-90 transition-opacity">
+          <Button size="sm" className="bg-gradient-to-r from-gaming-primary to-gaming-secondary hover:opacity-90 transition-opacity text-white">
             <DollarSign className="mr-2 h-4 w-4" />
             Generate Report
           </Button>
@@ -123,8 +123,8 @@ const AdminDashboard = () => {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => (
-          <Card key={index} className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6">
+          <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
+            <CardContent className="p-6 bg-gradient-to-br from-white to-gray-50">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-500">{stat.title}</p>
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
                     <span className="text-xs text-gray-500">{stat.description}</span>
                   </div>
                 </div>
-                <div className={`p-3 rounded-full ${stat.bgColor}`}>
+                <div className={`p-3 rounded-full ${stat.bgColor} animate-pulse-soft`}>
                   <stat.icon className={`w-5 h-5 ${stat.color}`} />
                 </div>
               </div>
@@ -148,22 +148,22 @@ const AdminDashboard = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Sales Chart */}
-        <Card className="lg:col-span-2 border border-gray-200 shadow-sm">
-          <CardHeader className="pb-2 flex flex-row items-center justify-between">
+        <Card className="lg:col-span-2 border-none shadow-lg overflow-hidden">
+          <CardHeader className="pb-2 flex flex-row items-center justify-between bg-gradient-to-r from-gaming-dark/5 to-gray-100">
             <div>
               <CardTitle>Sales Overview</CardTitle>
               <p className="text-sm text-gray-500 mt-1">Monitor your sales trends over time</p>
             </div>
             <Tabs defaultValue="weekly" className="w-auto" onValueChange={setTimeframe}>
-              <TabsList className="h-8">
-                <TabsTrigger value="daily" className="text-xs px-3">Daily</TabsTrigger>
-                <TabsTrigger value="weekly" className="text-xs px-3">Weekly</TabsTrigger>
-                <TabsTrigger value="monthly" className="text-xs px-3">Monthly</TabsTrigger>
+              <TabsList className="h-8 bg-gray-200">
+                <TabsTrigger value="daily" className="text-xs px-3 data-[state=active]:bg-gaming-primary data-[state=active]:text-white">Daily</TabsTrigger>
+                <TabsTrigger value="weekly" className="text-xs px-3 data-[state=active]:bg-gaming-primary data-[state=active]:text-white">Weekly</TabsTrigger>
+                <TabsTrigger value="monthly" className="text-xs px-3 data-[state=active]:bg-gaming-primary data-[state=active]:text-white">Monthly</TabsTrigger>
               </TabsList>
             </Tabs>
           </CardHeader>
-          <CardContent>
-            <div className="h-80">
+          <CardContent className="p-0">
+            <div className="h-80 p-4 bg-gradient-to-br from-white to-gray-50">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={salesData}
@@ -199,13 +199,13 @@ const AdminDashboard = () => {
         </Card>
       
         {/* Product Sales Distribution */}
-        <Card className="border border-gray-200 shadow-sm">
-          <CardHeader className="pb-2">
+        <Card className="border-none shadow-lg overflow-hidden">
+          <CardHeader className="pb-2 bg-gradient-to-r from-gaming-dark/5 to-gray-100">
             <CardTitle>Sales Distribution</CardTitle>
             <p className="text-sm text-gray-500 mt-1">Product category breakdown</p>
           </CardHeader>
-          <CardContent>
-            <div className="h-[300px] flex items-center justify-center">
+          <CardContent className="p-0">
+            <div className="h-[300px] flex items-center justify-center p-4 bg-gradient-to-br from-white to-gray-50">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -232,20 +232,20 @@ const AdminDashboard = () => {
       </div>
       
       {/* Recent Transactions */}
-      <Card className="border border-gray-200 shadow-sm">
-        <CardHeader className="pb-2">
+      <Card className="border-none shadow-lg overflow-hidden">
+        <CardHeader className="pb-2 bg-gradient-to-r from-gaming-dark/5 to-gray-100">
           <div className="flex justify-between items-center">
             <div>
               <CardTitle>Recent Transactions</CardTitle>
               <p className="text-sm text-gray-500 mt-1">Latest purchase activities</p>
             </div>
-            <Button variant="outline" size="sm">View All</Button>
+            <Button variant="outline" size="sm" className="hover:bg-gaming-primary hover:text-white">View All</Button>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-100">
                 <tr>
                   <th className="px-6 py-3">User</th>
                   <th className="px-6 py-3">Amount</th>
@@ -256,9 +256,9 @@ const AdminDashboard = () => {
               </thead>
               <tbody className="divide-y">
                 {[...Array(5)].map((_, i) => (
-                  <tr key={i} className="bg-white hover:bg-gray-50">
+                  <tr key={i} className="bg-white hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-medium">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-gaming-primary to-gaming-secondary flex items-center justify-center text-white font-medium">
                         {`U${i + 1}`}
                       </div>
                       <span>User{i + 1}</span>

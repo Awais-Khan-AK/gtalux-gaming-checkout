@@ -50,8 +50,8 @@ const AdminTransactions = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Transactions</h1>
-        <Button className="bg-gaming-primary hover:bg-gaming-primary/90">
+        <h1 className="text-2xl font-bold text-gray-900">Transactions</h1>
+        <Button className="bg-gradient-to-r from-gaming-primary to-gaming-secondary hover:opacity-90 transition-opacity text-white">
           <Download className="mr-2 h-4 w-4" /> Export
         </Button>
       </div>
@@ -62,7 +62,7 @@ const AdminTransactions = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
           <Input
             placeholder="Search transactions..."
-            className="pl-10"
+            className="pl-10 border-gray-300 focus:border-gaming-primary"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -70,7 +70,7 @@ const AdminTransactions = () => {
         <div className="flex items-center gap-2 min-w-[200px]">
           <Filter className="h-4 w-4 text-gray-500" />
           <Select value={filter} onValueChange={setFilter}>
-            <SelectTrigger>
+            <SelectTrigger className="border-gray-300 focus:border-gaming-primary">
               <SelectValue placeholder="Filter by status" />
             </SelectTrigger>
             <SelectContent>
@@ -85,28 +85,35 @@ const AdminTransactions = () => {
       </div>
       
       {/* Transactions Table */}
-      <Card>
-        <CardHeader>
+      <Card className="border-none shadow-lg overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-gaming-dark/5 to-gray-100">
           <CardTitle>Transaction List</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-gray-100">
               <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>User</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead>Product</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead className="font-semibold">ID</TableHead>
+                <TableHead className="font-semibold">User</TableHead>
+                <TableHead className="font-semibold">Amount</TableHead>
+                <TableHead className="font-semibold">Product</TableHead>
+                <TableHead className="font-semibold">Date</TableHead>
+                <TableHead className="font-semibold">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredTransactions.map((transaction) => (
-                <TableRow key={transaction.id}>
+              {filteredTransactions.map((transaction, index) => (
+                <TableRow key={transaction.id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                   <TableCell className="font-medium">{transaction.id}</TableCell>
-                  <TableCell>{transaction.user}</TableCell>
-                  <TableCell>{transaction.amount} SOL</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-r from-gaming-primary to-gaming-secondary flex items-center justify-center text-white text-xs">
+                        {transaction.user.substring(0, 2)}
+                      </div>
+                      {transaction.user}
+                    </div>
+                  </TableCell>
+                  <TableCell className="font-medium">{transaction.amount} SOL</TableCell>
                   <TableCell>{transaction.product}</TableCell>
                   <TableCell>{transaction.date}</TableCell>
                   <TableCell>

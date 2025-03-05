@@ -53,8 +53,8 @@ const AdminUsers = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Users</h1>
-        <Button className="bg-gaming-primary hover:bg-gaming-primary/90">
+        <h1 className="text-2xl font-bold text-gray-900">Users</h1>
+        <Button className="bg-gradient-to-r from-gaming-primary to-gaming-secondary hover:opacity-90 transition-opacity text-white">
           <UserPlus className="mr-2 h-4 w-4" /> Add User
         </Button>
       </div>
@@ -64,34 +64,41 @@ const AdminUsers = () => {
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
         <Input
           placeholder="Search users by name, email or wallet..."
-          className="pl-10"
+          className="pl-10 border-gray-300 focus:border-gaming-primary"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
       
       {/* Users Table */}
-      <Card>
-        <CardHeader>
+      <Card className="border-none shadow-lg overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-gaming-dark/5 to-gray-100">
           <CardTitle>User List</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-gray-100">
               <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Wallet Address</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Last Login</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                <TableHead className="font-semibold">Name</TableHead>
+                <TableHead className="font-semibold">Email</TableHead>
+                <TableHead className="font-semibold">Wallet Address</TableHead>
+                <TableHead className="font-semibold">Status</TableHead>
+                <TableHead className="font-semibold">Role</TableHead>
+                <TableHead className="font-semibold">Last Login</TableHead>
+                <TableHead className="text-right font-semibold">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredUsers.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell className="font-medium">{user.name}</TableCell>
+              {filteredUsers.map((user, index) => (
+                <TableRow key={user.id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                  <TableCell className="font-medium">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-gaming-primary to-gaming-secondary flex items-center justify-center text-white text-xs">
+                        {user.name.substring(0, 2)}
+                      </div>
+                      {user.name}
+                    </div>
+                  </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell className="font-mono text-xs">
                     {user.walletAddress.substring(0, 6)}...{user.walletAddress.substring(user.walletAddress.length - 4)}
@@ -117,16 +124,16 @@ const AdminUsers = () => {
                   <TableCell className="text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" className="hover:bg-gray-100">
                           <MoreHorizontal className="h-4 w-4" />
                           <span className="sr-only">Open menu</span>
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem>
+                      <DropdownMenuContent align="end" className="bg-white">
+                        <DropdownMenuItem className="hover:bg-gray-100">
                           <UserCheck className="h-4 w-4 mr-2" /> View Details
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem className="hover:bg-gray-100">
                           <Shield className="h-4 w-4 mr-2" /> Change Role
                         </DropdownMenuItem>
                       </DropdownMenuContent>
