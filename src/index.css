@@ -84,6 +84,70 @@
   z-index: -1;
 }
 
+/* Cyberpunk-specific animations */
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(15, 160, 206, 0.5),
+                 0 0 20px rgba(15, 160, 206, 0.3),
+                 0 0 30px rgba(15, 160, 206, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(15, 160, 206, 0.8),
+                 0 0 25px rgba(15, 160, 206, 0.5),
+                 0 0 35px rgba(15, 160, 206, 0.3);
+  }
+}
+
+.neon-text {
+  animation: neon-pulse 3s infinite;
+  color: #0FA0CE;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch-effect:hover {
+  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both;
+}
+
+/* Scroll reveal animation */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+}
+
+.revealed {
+  animation: reveal 0.8s ease forwards;
+}
+
 /* Admin table styles with better contrast */
 .admin-table {
   @apply w-full border-collapse;
